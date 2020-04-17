@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DevExpress.XtraRichEdit;
 using DevExpress.Office.Utils;
 using DevExpress.XtraRichEdit.API.Native;
+using DevExpress.Portable;
 
 namespace RichEditLogViewer {
     public partial class Form1 : Form {
@@ -17,7 +18,7 @@ namespace RichEditLogViewer {
             richEditControl1.ActiveViewType = RichEditViewType.Draft;
             richEditControl1.Options.HorizontalRuler.Visibility = RichEditRulerVisibility.Hidden;
             richEditControl1.Views.DraftView.BackColor = Color.Black;
-            richEditControl1.Views.DraftView.Padding = new Padding(0);
+            richEditControl1.Views.DraftView.Padding = new PortablePadding(0);
             richEditControl1.CreateNewDocument();
         }
 

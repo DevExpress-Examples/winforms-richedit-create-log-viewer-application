@@ -4,6 +4,7 @@ Imports System.Windows.Forms
 Imports DevExpress.XtraRichEdit
 Imports DevExpress.Office.Utils
 Imports DevExpress.XtraRichEdit.API.Native
+Imports DevExpress.Portable
 
 Namespace RichEditLogViewer
     Partial Public Class Form1
@@ -19,7 +20,7 @@ Namespace RichEditLogViewer
             richEditControl1.ActiveViewType = RichEditViewType.Draft
             richEditControl1.Options.HorizontalRuler.Visibility = RichEditRulerVisibility.Hidden
             richEditControl1.Views.DraftView.BackColor = Color.Black
-            richEditControl1.Views.DraftView.Padding = New Padding(0)
+            richEditControl1.Views.DraftView.Padding = New PortablePadding(0)
             richEditControl1.CreateNewDocument()
         End Sub
 
