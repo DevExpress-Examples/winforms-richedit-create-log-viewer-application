@@ -1,4 +1,4 @@
-﻿Imports System
+Imports System
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports DevExpress.XtraRichEdit
@@ -6,15 +6,16 @@ Imports DevExpress.Office.Utils
 Imports DevExpress.XtraRichEdit.API.Native
 
 Namespace RichEditLogViewer
-    Partial Public Class Form1
+
+    Public Partial Class Form1
         Inherits Form
 
-        Private rnd As New Random()
+        Private rnd As Random = New Random()
+
         Private mesageFormat As String = "{0}: {1,-20} - {2}"
 
         Public Sub New()
             InitializeComponent()
-
             richEditControl1.ReadOnly = True
             richEditControl1.ActiveViewType = RichEditViewType.Draft
             richEditControl1.Options.HorizontalRuler.Visibility = RichEditRulerVisibility.Hidden
@@ -23,31 +24,25 @@ Namespace RichEditLogViewer
             richEditControl1.CreateNewDocument()
         End Sub
 
-        Private Sub richEditControl1_DocumentLoaded(ByVal sender As Object, ByVal e As EventArgs) Handles richEditControl1.DocumentLoaded
+        Private Sub richEditControl1_DocumentLoaded(ByVal sender As Object, ByVal e As EventArgs)
             ApplyDefaultDocumentFormat()
         End Sub
 
-        Private Sub richEditControl1_EmptyDocumentCreated(ByVal sender As Object, ByVal e As EventArgs) Handles richEditControl1.EmptyDocumentCreated
+        Private Sub richEditControl1_EmptyDocumentCreated(ByVal sender As Object, ByVal e As EventArgs)
             ApplyDefaultDocumentFormat()
         End Sub
 
-        Private Sub timer1_Tick(ByVal sender As Object, ByVal e As EventArgs) Handles timer1.Tick
+        Private Sub timer1_Tick(ByVal sender As Object, ByVal e As EventArgs)
             Dim document As Document = richEditControl1.Document
-            Dim prefix As String = ControlChars.CrLf & "New message"
-
-            If document.Paragraphs(0).Range.Length <= 1 Then
-                prefix = prefix.TrimStart()
-            End If
-
+            Dim prefix As String = Microsoft.VisualBasic.Constants.vbCrLf & "New message"
+            If document.Paragraphs(0).Range.Length <= 1 Then prefix = prefix.TrimStart()
             document.AppendText(String.Format(mesageFormat, prefix, GetActualMessage(), Date.Now.ToString()))
-
             document.CaretPosition = document.Paragraphs.Get(document.Range.End).Range.Start
             richEditControl1.ScrollToCaret()
         End Sub
 
         Private Function GetActualMessage() As String
             Dim index As Integer = rnd.Next(3)
-
             Select Case index
                 Case 0
                     Return "Information"
